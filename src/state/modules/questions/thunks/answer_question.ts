@@ -21,7 +21,7 @@ export const handleAnswerQuestion = createAsyncThunk<
   "questions/handleAnswerQuestion",
   async (info, { getState, rejectWithValue }) => {
     try {
-      const { authedUser } = getState();
+      const authedUser = getState().authedUser.entities;
       if (!authedUser)
         throw new Error("cannot answer question: user is not authenticated");
       const answer = { ...info, authedUser: authedUser };
@@ -34,3 +34,30 @@ export const handleAnswerQuestion = createAsyncThunk<
     }
   }
 );
+
+export const handleAnswerQuestionReducer = (
+  builder: ActionReducerMapBuilder<IState<Record<string, Question>>>
+) => {
+  builder.addCase(handleAnswerQuestion.fulfilled, (state, { payload }) => {
+    state.entities = {
+      ...state.entities,
+      [payload.qid]: {
+        ...state.entities[payload.qid],
+        [payload.answer]: {
+          ...state.entities[payload.qid][payload.answer],
+          votes: state.entities[payload.qid][payload.answer].votes.concat([
+            payload.authedUser,
+          ]),
+        },
+      },
+    };
+    state.loading = LoadingStatus.succeeded;
+  });
+  builder.addCase(handleAnswerQuestion.rejected, (state, { error }) => {
+    state.loading = LoadingStatus.failed;
+    state.error = error.message;
+  });
+  builder.addCase(handleAnswerQuestion.pending, (state) => {
+    state.loading = LoadingStatus.pending;
+  });
+};

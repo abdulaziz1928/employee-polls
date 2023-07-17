@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Question } from "./models/question";
 import IState from "../../types/state";
 import LoadingStatus from "../../types/loading_status";
+import { handleAddQuestionReducer } from "./thunks/add_question";
 
 const initialState: IState<Record<string, Question>> = {
   entities: {},
@@ -17,7 +18,9 @@ const questionsSlice = createSlice({
       state.loading = LoadingStatus.succeeded;
     },
   },
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    handleAddQuestionReducer(builder);
+  },
 });
 
 export const { receiveQuestions } = questionsSlice.actions;

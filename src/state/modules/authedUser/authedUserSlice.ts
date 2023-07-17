@@ -1,13 +1,21 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import LoadingStatus from "../../types/loading_status";
+import IState from "../../types/state";
 
-const initialState: string | null = null;
+const initialState: IState<string | null> = {
+  entities: null,
+  loading: LoadingStatus.idle,
+};
 
 const authedUserSlice = createSlice({
   name: "authedUser",
-  initialState: initialState as string | null,
+  initialState: initialState as IState<string | null>,
   reducers: {
-    setAuthedUser: (_, action: PayloadAction<string>) => action.payload,
-    logoutAuthedUser: () => null,
+    setAuthedUser(state, action: PayloadAction<string>) {
+      state.entities= action.payload
+      state.loading=LoadingStatus.succeeded
+    },
+    logoutAuthedUser: () => initialState,
   },
 });
 

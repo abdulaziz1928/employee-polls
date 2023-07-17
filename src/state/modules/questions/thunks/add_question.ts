@@ -13,7 +13,7 @@ export const handleAddQuestion = createAsyncThunk<
   "questions/handleAddQuestion",
   async (question, { getState, rejectWithValue }) => {
     try {
-      const { authedUser } = getState();
+      const authedUser = getState().authedUser.entities;
 
       if (!authedUser)
         throw new Error("cannot add question: user is not authenticated");
