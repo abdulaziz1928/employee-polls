@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../..";
 import { handleInitialData } from "../../state/modules/shared/actions";
 import { shallowEqual } from "react-redux";
+import Header from "../layout/header";
+import { CssBaseline } from "@mui/material";
 
 export default function App() {
   /// TODO: handleinitialdata is runned twice
@@ -13,6 +15,11 @@ export default function App() {
   useEffect(() => {
     dispatch(handleInitialData());
   }, [dispatch]);
-  return <>{!authedUser ? <div>loading</div> : <div>my app</div>}</>;
+  return (
+    <>
+      <CssBaseline />
+      {!authedUser ? <div>loading</div> : <Header />}
+    </>
+  );
 }
 

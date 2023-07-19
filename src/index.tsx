@@ -7,8 +7,9 @@ import { Provider } from "react-redux";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { store, RootState, AppDispatch } from "./state/store";
 import { BrowserRouter } from "react-router-dom";
-import { theme } from "./ui/styles/theme/theme";
+import { theme, darkTheme } from "./ui/styles/theme/theme";
 import { ThemeProvider } from "@mui/material";
+import DarkThemeProvider from "./ui/components/theme_provider";
 
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 export const useAppDispatch: () => AppDispatch = useDispatch;
@@ -20,9 +21,9 @@ root.render(
   <Provider store={store}>
     <React.StrictMode>
       <BrowserRouter>
-        <ThemeProvider theme={theme}>
+        <DarkThemeProvider>
           <App />
-        </ThemeProvider>
+        </DarkThemeProvider>
       </BrowserRouter>
     </React.StrictMode>
   </Provider>
