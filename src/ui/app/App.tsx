@@ -1,25 +1,31 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../..";
 import { handleInitialData } from "../../state/modules/shared/actions";
-import { shallowEqual } from "react-redux";
 import Header from "../layout/header";
 import { CssBaseline } from "@mui/material";
+import { Routes, Route } from "react-router-dom";
+import PageRoutes from "../../state/types/page_routes";
+import HomePage from "../pages/home_page";
+import LeaderboardPage from "../pages/leaderboard_page";
+import NewQuestionPage from "../pages/new_question_page";
+import QuestionPage from "../pages/question_page";
 
 export default function App() {
-  /// TODO: handleinitialdata is runned twice
   const dispatch = useAppDispatch();
-  const [authedUser] = useAppSelector(
-    (state) => [state.authedUser],
-    shallowEqual
-  );
+  const authedUser = useAppSelector((state) => state.authedUser.entities);
   useEffect(() => {
     dispatch(handleInitialData());
   }, [dispatch]);
   return (
     <>
       <CssBaseline />
-      {!authedUser ? <div>loading</div> : <Header />}
+      {authedUser && <Header />}
+      <Routes>
+        <Route path={PageRoutes.Home} element={<HomePage />} />
+        <Route path={PageRoutes.Leaderboard} element={<LeaderboardPage />} />
+        <Route path={PageRoutes.Question} element={<QuestionPage />} />
+        <Route path={PageRoutes.New} element={<NewQuestionPage />} />
+      </Routes>
     </>
   );
 }
-

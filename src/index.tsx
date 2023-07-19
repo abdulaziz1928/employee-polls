@@ -19,13 +19,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <Provider store={store}>
-    <React.StrictMode>
-      <BrowserRouter>
-        <DarkThemeProvider>
-          <App />
-        </DarkThemeProvider>
-      </BrowserRouter>
-    </React.StrictMode>
+    <BrowserRouter>
+      <DarkThemeProvider>
+        <App />
+      </DarkThemeProvider>
+    </BrowserRouter>
   </Provider>
 );
 
@@ -33,4 +31,3 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-
