@@ -100,17 +100,17 @@ export default function UserMenu(props: IUserMenuProps) {
         open={Boolean(anchorElUser)}
         onClose={() => handleCloseUserMenu()}
       >
-        {settings.map((setting) => (
-          <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
-            <Typography textAlign="center">{setting}</Typography>
-          </MenuItem>
-        ))}
         {mobileSettings.map((setting) => (
           <MenuItem
             sx={{ display: { sm: "inhirit", md: "none" } }}
             key={setting}
             onClick={() => handleCloseUserMenu(setting)}
           >
+            <Typography textAlign="center">{setting}</Typography>
+          </MenuItem>
+        ))}
+        {settings.map((setting) => (
+          <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
             <Typography textAlign="center">{setting}</Typography>
           </MenuItem>
         ))}

@@ -6,7 +6,7 @@ export interface IHeaderProps {}
 
 export default function Header(props: IHeaderProps) {
   return (
-    <AppBar position="sticky" color="primary" enableColorOnDark>
+    <AppBar position="sticky" color="primary">
       <Toolbar variant="dense">
         <NavMenu />
         <UserMenu />

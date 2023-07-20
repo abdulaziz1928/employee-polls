@@ -27,9 +27,9 @@ export default function NavMenu(props: INavMenuProps) {
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleCloseNavMenu = (route: string) => {
+  const handleCloseNavMenu = ({ route }: { route?: string }) => {
     setAnchorElNav(null);
-    navigte(route);
+    if (route) navigte(route);
   };
 
   return (
@@ -67,7 +67,7 @@ export default function NavMenu(props: INavMenuProps) {
           {pages.map((page) => (
             <MenuItem
               key={page.name}
-              onClick={() => handleCloseNavMenu(page.route)}
+              onClick={() => handleCloseNavMenu({ route: page.route })}
             >
               <Typography textAlign="center">{page.name}</Typography>
             </MenuItem>
@@ -85,7 +85,7 @@ export default function NavMenu(props: INavMenuProps) {
         {pages.map((page) => (
           <Button
             key={page.name}
-            onClick={() => handleCloseNavMenu(page.route)}
+            onClick={() => handleCloseNavMenu({ route: page.route })}
             sx={{
               color: "white",
               display: "block",

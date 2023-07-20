@@ -17,12 +17,7 @@ export default function NewQuestionPage() {
     <Container maxWidth="sm" sx={{ my: 3, p: 1 }}>
       <Box sx={{ display: "flex", flexDirection: "column", p: 3, gap: 3 }}>
         <Box>
-          <Typography
-            component="h1"
-            variant="h3"
-            align="center"
-            color="text.primary"
-          >
+          <Typography component="h1" variant="h3" align="center">
             Would You Rather
           </Typography>
           <Typography
