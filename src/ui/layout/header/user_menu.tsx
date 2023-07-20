@@ -9,21 +9,27 @@ import {
   Typography,
   Menu,
   MenuItem,
+  FormControlLabel,
+  FormGroup,
+  Switch,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import { toggleTheme } from "../../../state/modules/prefrences/prefrencesSlice";
 
 export interface IUserMenuProps {}
 
 const settings = ["logout"];
+const mobileSettings = ["Toggle Theme"];
 
 export default function UserMenu(props: IUserMenuProps) {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
   const dispatch = useAppDispatch();
-  const user = useAppSelector(
-    (state) => state.users.entities[state.authedUser.entities!]
-  );
+  const [user, darkThemeEnabled] = useAppSelector((state) => [
+    state.users.entities[state.authedUser.entities!],
+    state.prefrences.darkthemeEnabled,
+  ]);
 
   const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -31,11 +37,30 @@ export default function UserMenu(props: IUserMenuProps) {
 
   const handleCloseUserMenu = (option?: string) => {
     setAnchorElUser(null);
-    if (option && option === "logout") dispatch(logoutAuthedUser());
+    if (option) {
+      switch (option) {
+        case "logout":
+          dispatch(logoutAuthedUser());
+          break;
+        case "Toggle Theme":
+          changeTheme();
+          break;
+      }
+    }
+  };
+
+  const changeTheme = () => {
+    dispatch(toggleTheme());
   };
 
   return (
-    <Box>
+    <Box display="flex" alignItems="center">
+      <FormGroup sx={{ display: { xs: "none", md: "flex" } }}>
+        <FormControlLabel
+          control={<Switch checked={darkThemeEnabled} onChange={changeTheme} />}
+          label="Dark Theme"
+        />
+      </FormGroup>
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu}>
           <Box sx={{ display: "flex", gap: "0.5rem" }}>
@@ -77,6 +102,15 @@ export default function UserMenu(props: IUserMenuProps) {
       >
         {settings.map((setting) => (
           <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
+            <Typography textAlign="center">{setting}</Typography>
+          </MenuItem>
+        ))}
+        {mobileSettings.map((setting) => (
+          <MenuItem
+            sx={{ display: { sm: "inhirit", md: "none" } }}
+            key={setting}
+            onClick={() => handleCloseUserMenu(setting)}
+          >
             <Typography textAlign="center">{setting}</Typography>
           </MenuItem>
         ))}

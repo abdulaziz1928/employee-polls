@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@mui/material";
+import { ThemeProvider, responsiveFontSizes } from "@mui/material";
 import { ReactNode } from "react";
 import { useAppSelector } from "../..";
 import { darkTheme, theme } from "../styles/theme/theme";
@@ -13,7 +13,9 @@ const DarkThemeProvider = (props: IDarkThemeProviderProps) => {
     (state) => state.prefrences.darkthemeEnabled
   );
   return (
-    <ThemeProvider theme={darkThemeEnabled ? darkTheme : theme}>
+    <ThemeProvider
+      theme={responsiveFontSizes(darkThemeEnabled ? darkTheme : theme)}
+    >
       {children}
     </ThemeProvider>
   );
