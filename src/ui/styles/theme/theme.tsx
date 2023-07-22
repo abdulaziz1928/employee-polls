@@ -29,6 +29,9 @@ export const theme = createTheme({
       "800": "#7a00c5",
       "900": "#4f00ba",
     },
+    background: {
+      default: "#f2f2f2",
+    },
   },
 });
 
@@ -36,19 +39,6 @@ export const darkTheme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#008cf7", //light blue
-      "50": "#e2f1fe",
-      "100": "#b8dbfc",
-      "200": "#8bc4fb",
-      "300": "#5aadf9",
-      "400": "#339cf9",
-      "500": "#008cf7",
-      "600": "#067ee8",
-      "700": "#0c6cd5",
-      "800": "#0d5ac2",
-      "900": "#0e3ca3",
-    },
-    secondary: {
       main: "#d355e9", //pink
       "50": "#f8e4fb",
       "100": "#ecbbf5",
@@ -60,6 +50,19 @@ export const darkTheme = createTheme({
       "700": "#9000cc",
       "800": "#7a00c5",
       "900": "#4f00ba",
+    },
+    secondary: {
+      main: "#008cf7", //light blue
+      "50": "#e2f1fe",
+      "100": "#b8dbfc",
+      "200": "#8bc4fb",
+      "300": "#5aadf9",
+      "400": "#339cf9",
+      "500": "#008cf7",
+      "600": "#067ee8",
+      "700": "#0c6cd5",
+      "800": "#0d5ac2",
+      "900": "#0e3ca3",
     },
   },
 });

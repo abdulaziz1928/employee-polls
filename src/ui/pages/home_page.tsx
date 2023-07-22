@@ -1,3 +1,59 @@
+import { Container, Tabs, Tab, Typography, Paper, Box } from "@mui/material";
+import { useState } from "react";
+import TabPanel from "../components/home/tab_panel";
+import { useAppSelector } from "../..";
+import { shallowEqual } from "react-redux";
+import { sortQuestions, splitQuestions } from "../../state/utils/helpers";
+import QuestionPolls from "../components/home/polls";
+
 export default function HomePage() {
-  return <div>Home</div>;
+  const [value, setValue] = useState(0);
+
+  const questions = sortQuestions(
+    useAppSelector((state) => state.questions.entities)
+  );
+  const userAnswers = useAppSelector((state) => {
+    const authedUser = state.authedUser.entities;
+    const answers =
+      authedUser === null ? {} : state.users.entities[authedUser].answers;
+    return answers;
+  }, shallowEqual);
+
+  const [answered, unAnswered] = splitQuestions(questions, userAnswers);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
+  return (
+    <Container
+      sx={{
+        maxWidth: { md: "md", lg: "lg" },
+        my: 3,
+        py: 3,
+        display: "flex",
+        flexDirection: "column",
+        gap: 3,
+        borderRadius: "1rem",
+      }}
+    >
+      <Typography component="h1" variant="h3" align="center">
+        Home
+      </Typography>
+
+      <Box component={Paper}>
+        <Tabs value={value} onChange={handleChange} variant="fullWidth">
+          <Tab label="Unanswered Questions" />
+          <Tab label="Answered Questions" />
+        </Tabs>
+
+        <TabPanel value={value} index={0}>
+          <QuestionPolls polls={unAnswered} />
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <QuestionPolls polls={answered} />
+        </TabPanel>
+      </Box>
+    </Container>
+  );
 }

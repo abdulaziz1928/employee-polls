@@ -2,9 +2,9 @@ import {
   Box,
   Container,
   Typography,
-  Grid,
   TextField,
   Button,
+  Stack,
 } from "@mui/material";
 import { FormEvent } from "react";
 export default function NewQuestionPage() {
@@ -14,8 +14,8 @@ export default function NewQuestionPage() {
   };
 
   return (
-    <Container maxWidth="sm" sx={{ my: 3, p: 1 }}>
-      <Box sx={{ display: "flex", flexDirection: "column", p: 3, gap: 3 }}>
+    <Container maxWidth="md" sx={{ my: 6 }}>
+      <Stack spacing={3}>
         <Box>
           <Typography component="h1" variant="h3" align="center">
             Would You Rather
@@ -32,35 +32,29 @@ export default function NewQuestionPage() {
         </Box>
 
         <Box component="form" noValidate onSubmit={handleOnSubmit}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                id="optionOne"
-                label="Option One"
-                name="optionOne"
-                multiline
-                required
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                id="optionTwo"
-                label="Option Two"
-                name="optionTwo"
-                multiline
-                required
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Button variant="contained" sx={{ my: 1 }} fullWidth>
-                <Typography variant="h6">Submit</Typography>
-              </Button>
-            </Grid>
-          </Grid>
+          <Stack spacing={2}>
+            <TextField
+              id="optionOne"
+              label="Option One"
+              name="optionOne"
+              multiline
+              required
+              fullWidth
+            />
+            <TextField
+              id="optionTwo"
+              label="Option Two"
+              name="optionTwo"
+              multiline
+              required
+              fullWidth
+            />
+            <Button variant="contained" sx={{ my: 1 }} fullWidth>
+              <Typography variant="h6">Submit</Typography>
+            </Button>
+          </Stack>
         </Box>
-      </Box>
+      </Stack>
     </Container>
   );
 }

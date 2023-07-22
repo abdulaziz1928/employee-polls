@@ -1,0 +1,94 @@
+import {
+  Paper,
+  TableContainer,
+  Table,
+  TableHead,
+  TableCell,
+  TableRow,
+  TableBody,
+  Typography,
+  Box,
+  Avatar,
+} from "@mui/material";
+import { sortUsers } from "../../../state/utils/helpers";
+import { useAppSelector } from "../../..";
+
+export interface ILeaderboardTableProps {}
+
+export default function LeaderboardTable(props: ILeaderboardTableProps) {
+  const users = sortUsers(useAppSelector((state) => state.users.entities));
+
+  return (
+    <TableContainer
+      component={Paper}
+      elevation={0.5}
+      sx={{
+        overflow: "auto",
+      }}
+    >
+      <Box sx={{ width: "100%", display: "table", tableLayout: "fixed" }}>
+        <Table>
+          <TableHead>
+            <TableRow
+              sx={{
+                bgcolor: (theme) =>
+                  theme.palette.mode === "dark"
+                    ? "primary.400"
+                    : "primary.main",
+              }}
+            >
+              <TableCell colSpan={2}>
+                <Typography variant="body1" color="white">
+                  Users
+                </Typography>
+              </TableCell>
+              <TableCell align="center">
+                {" "}
+                <Typography variant="body1" color="white">
+                  Answers
+                </Typography>
+              </TableCell>
+              <TableCell align="center">
+                <Typography variant="body1" color="white">
+                  Created
+                </Typography>
+              </TableCell>
+              <TableCell align="center">
+                <Typography variant="body1" color="white">
+                  Score
+                </Typography>
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {users.map((user) => {
+              const numAnswers = Object.keys(user.answers).length;
+              const numQuestions = user.questions.length;
+              const score = numAnswers + numQuestions;
+              return (
+                <TableRow key={user.id}>
+                  <TableCell colSpan={2}>
+                    <Box sx={{ display: "flex", gap: 1 }}>
+                      <Avatar
+                        sx={{ display: { xs: "none", sm: "flex" } }}
+                      ></Avatar>
+                      <Box sx={{ flexDirection: "column" }}>
+                        <Typography variant="body1">{user.name}</Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          {user.id}
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </TableCell>
+                  <TableCell align="center">{numAnswers}</TableCell>
+                  <TableCell align="center">{numQuestions}</TableCell>
+                  <TableCell align="center">{score}</TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </Box>
+    </TableContainer>
+  );
+}
