@@ -21,7 +21,6 @@ export default function LeaderboardTable(props: ILeaderboardTableProps) {
   return (
     <TableContainer
       component={Paper}
-      elevation={0.5}
       sx={{
         overflow: "auto",
       }}

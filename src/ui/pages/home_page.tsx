@@ -33,6 +33,7 @@ export default function HomePage() {
         py: 3,
         display: "flex",
         flexDirection: "column",
+
         gap: 3,
         borderRadius: "1rem",
       }}
@@ -41,7 +42,13 @@ export default function HomePage() {
         Home
       </Typography>
 
-      <Box component={Paper}>
+      <Box
+        component={Paper}
+        sx={{
+          background: (theme) =>
+            theme.palette.mode === "dark" ? "#1B1B1B" : "#FAFAFA",
+        }}
+      >
         <Tabs value={value} onChange={handleChange} variant="fullWidth">
           <Tab label="Unanswered Questions" />
           <Tab label="Answered Questions" />

@@ -7,8 +7,10 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import { Question } from "../../../state/modules/questions";
 import { formatDate } from "../../../state/utils/helpers";
+import PageRoutes from "../../../state/types/page_routes";
 
 export interface IPollCardProps {
   question: Question;
@@ -16,7 +18,7 @@ export interface IPollCardProps {
 
 export default function PollCard(props: IPollCardProps) {
   const { question } = props;
-  const { author, optionOne, optionTwo, timestamp } = question;
+  const { author, optionOne, optionTwo, timestamp, id } = question;
 
   const date = formatDate(timestamp);
   return (
@@ -66,7 +68,12 @@ export default function PollCard(props: IPollCardProps) {
         <Typography pb={2} textOverflow="ellipsis">
           {optionTwo.text}
         </Typography>
-        <Button fullWidth variant="contained">
+        <Button
+          component={Link}
+          to={`question/${id}`}
+          fullWidth
+          variant="contained"
+        >
           Vote
         </Button>
       </CardContent>

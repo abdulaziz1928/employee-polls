@@ -5,6 +5,7 @@ import { saveQuestionAnswer } from "../../../apis/api";
 import IState from "../../../types/state";
 import LoadingStatus from "../../../types/loading_status";
 import Answer from "../../../types/answer";
+import { saveAnswerToUser } from "../../users";
 
 export const handleAnswerQuestion = createAsyncThunk<
   {
@@ -19,7 +20,7 @@ export const handleAnswerQuestion = createAsyncThunk<
   { state: RootState }
 >(
   "questions/handleAnswerQuestion",
-  async (info, { getState, rejectWithValue }) => {
+  async (info, { getState, rejectWithValue, dispatch }) => {
     try {
       const authedUser = getState().authedUser.entities;
       if (!authedUser)
@@ -27,6 +28,7 @@ export const handleAnswerQuestion = createAsyncThunk<
       const answer = { ...info, authedUser: authedUser };
 
       await saveQuestionAnswer(answer);
+      dispatch(saveAnswerToUser(answer));
 
       return answer;
     } catch (e) {
