@@ -3,6 +3,7 @@ import { Question } from "./models/question";
 import IState from "../../types/state";
 import LoadingStatus from "../../types/loading_status";
 import { handleAddQuestionReducer } from "./thunks/add_question";
+import { handleAnswerQuestionReducer } from "./thunks/answer_question";
 
 const initialState: IState<Record<string, Question>> = {
   entities: {},
@@ -20,6 +21,7 @@ const questionsSlice = createSlice({
   },
   extraReducers: (builder) => {
     handleAddQuestionReducer(builder);
+    handleAnswerQuestionReducer(builder);
   },
 });
 

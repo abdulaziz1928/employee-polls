@@ -1,90 +1,57 @@
 import { useParams } from "react-router-dom";
-import Container from "@mui/material/Container";
-import { Avatar, Grid, Stack, Typography } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../..";
-import { Option, Question } from "../../state/modules/questions";
+import { Typography, Box, LinearProgress, Container } from "@mui/material";
+import { Question } from "../../state/modules/questions";
 import LoadingStatus from "../../state/types/loading_status";
-import OptionChoice from "../components/question/option_choice";
+import AnswerQuestion from "../components/question/answer_question";
+import { useAppSelector } from "../..";
 import { shallowEqual } from "react-redux";
-import { handleAnswerQuestion } from "../../state/modules/questions/thunks/answer_question";
-import Answer from "../../state/types/answer";
+import QuestionResults from "../components/question/question_results";
 
 export default function QuestionPage() {
   const { id } = useParams();
-  const dispatch = useAppDispatch();
-  const [question, loading] = useAppSelector((state) => {
+
+  const loading = useAppSelector((state) => state.questions.loading);
+  const [question, isAnswered] = useAppSelector((state) => {
+    const authedUser = state.authedUser.entities;
     let question: Question | null = null;
-    if (id) question = state.questions.entities[id];
-    return [question, state.questions.loading];
+    let isAnswered: boolean = false;
+    if (id) {
+      question = state.questions.entities[id];
+      isAnswered =
+        authedUser !== null &&
+        (question?.optionOne.votes.includes(authedUser) ||
+          question?.optionTwo.votes.includes(authedUser));
+    }
+    return [question, isAnswered];
   }, shallowEqual);
-  if (!question && loading === LoadingStatus.succeeded) {
+
+  const isLoading = loading === LoadingStatus.pending;
+
+  if (!question) {
+    if (loading === LoadingStatus.succeeded) {
+      return (
+        <Container maxWidth="sm">
+          <Typography variant="h2" py={4}>
+            Poll doesn't exist
+          </Typography>
+        </Container>
+      );
+    }
     return (
-      <Container maxWidth="sm">
-        <Typography variant="h2" py={4}>
-          Poll doesn't exist
-        </Typography>
-      </Container>
+      <Box sx={{ width: "100%" }}>
+        <LinearProgress color="secondary" />
+      </Box>
     );
   }
 
-  const { author, optionOne, optionTwo } = question!;
-
-  const handleSubmitChoice = (option: Option) => {
-    const answer = option === optionOne ? Answer.optionOne : Answer.optionTwo;
-    dispatch(handleAnswerQuestion({ qid: id!, answer: answer }));
-    console.log(option);
-  };
-
   return (
-    <Container
-      sx={{
-        maxWidth: { md: "md", lg: "lg", xl: "xl" },
-        my: 3,
-        py: 3,
-        display: "flex",
-        flexDirection: "column",
-
-        gap: 3,
-      }}
-    >
-      <Stack alignItems="center" gap={4}>
-        <Typography component="h1" variant="h3" align="center">
-          Poll By {author}
-        </Typography>
-        <Avatar
-          sx={{
-            width: { lg: "12rem", md: "8rem", xs: "6rem" },
-            height: { lg: "12rem", md: "8rem", xs: "6rem" },
-          }}
-        />
-        <Typography component="h1" variant="h3" align="center">
-          Would You Rather
-        </Typography>
-        <Grid container spacing={4} alignItems="center">
-          <Grid item xs={12} lg={5.5}>
-            <OptionChoice
-              option={optionOne}
-              submitChoice={handleSubmitChoice}
-            />
-          </Grid>
-          <Grid item xs={12} lg={1}>
-            <Typography
-              variant="h6"
-              fontWeight="bold"
-              color="text.secondary"
-              align="center"
-            >
-              OR
-            </Typography>
-          </Grid>
-          <Grid item xs={12} lg={5.5}>
-            <OptionChoice
-              option={optionTwo}
-              submitChoice={handleSubmitChoice}
-            />
-          </Grid>
-        </Grid>
-      </Stack>
-    </Container>
+    <>
+      {isLoading && <LinearProgress color="secondary" />}
+      {isAnswered ? (
+        <QuestionResults />
+      ) : (
+        <AnswerQuestion question={question} loading={loading} />
+      )}
+    </>
   );
 }

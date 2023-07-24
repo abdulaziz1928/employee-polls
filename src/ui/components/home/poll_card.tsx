@@ -10,14 +10,14 @@ import {
 import { Link } from "react-router-dom";
 import { Question } from "../../../state/modules/questions";
 import { formatDate } from "../../../state/utils/helpers";
-import PageRoutes from "../../../state/types/page_routes";
 
 export interface IPollCardProps {
   question: Question;
+  isAnswered?: boolean;
 }
 
 export default function PollCard(props: IPollCardProps) {
-  const { question } = props;
+  const { question, isAnswered } = props;
   const { author, optionOne, optionTwo, timestamp, id } = question;
 
   const date = formatDate(timestamp);
@@ -73,8 +73,13 @@ export default function PollCard(props: IPollCardProps) {
           to={`question/${id}`}
           fullWidth
           variant="contained"
+          color={isAnswered ? "secondary" : "primary"}
         >
-          Vote
+          {isAnswered ? (
+            <Typography variant="body1">View Results</Typography>
+          ) : (
+            <Typography variant="body1">Vote</Typography>
+          )}
         </Button>
       </CardContent>
     </Card>

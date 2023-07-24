@@ -5,12 +5,28 @@ import {
   TextField,
   Button,
   Stack,
+  FormControl,
 } from "@mui/material";
 import { FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../..";
+import { handleAddQuestion } from "../../state/modules/questions/thunks/add_question";
+import PageRoutes from "../../state/types/page_routes";
 export default function NewQuestionPage() {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const handleOnSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    console.log(event);
+    const data = new FormData(event.currentTarget);
+    const optionOneText = data.get("optionOne")?.toString();
+    const optionTwoText = data.get("optionTwo")?.toString();
+    dispatch(
+      handleAddQuestion({
+        optionOneText: optionOneText!,
+        optionTwoText: optionTwoText!,
+      })
+    );
+    navigate(PageRoutes.Home);
   };
 
   return (
@@ -31,28 +47,30 @@ export default function NewQuestionPage() {
           </Typography>
         </Box>
 
-        <Box component="form" noValidate onSubmit={handleOnSubmit}>
-          <Stack spacing={2}>
-            <TextField
-              id="optionOne"
-              label="Option One"
-              name="optionOne"
-              multiline
-              required
-              fullWidth
-            />
-            <TextField
-              id="optionTwo"
-              label="Option Two"
-              name="optionTwo"
-              multiline
-              required
-              fullWidth
-            />
-            <Button variant="contained" sx={{ my: 1 }} fullWidth>
+        <Box component="form" onSubmit={handleOnSubmit}>
+          <FormControl fullWidth>
+            <Stack spacing={2}>
+              <TextField
+                id="optionOne"
+                label="Option One"
+                name="optionOne"
+                multiline
+                required
+                fullWidth
+              />
+              <TextField
+                id="optionTwo"
+                label="Option Two"
+                name="optionTwo"
+                multiline
+                required
+                fullWidth
+              />
+            </Stack>
+            <Button variant="contained" sx={{ my: 1 }} fullWidth type="submit">
               <Typography variant="h6">Submit</Typography>
             </Button>
-          </Stack>
+          </FormControl>
         </Box>
       </Stack>
     </Container>

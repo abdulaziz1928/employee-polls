@@ -58,7 +58,7 @@ export default function HomePage() {
           <QuestionPolls polls={unAnswered} />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <QuestionPolls polls={answered} />
+          <QuestionPolls polls={answered} isAnswered />
         </TabPanel>
       </Box>
     </Container>

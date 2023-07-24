@@ -239,7 +239,7 @@ export function _saveQuestionAnswer({
       };
 
       resolve(true);
-    }, 500);
+    }, 1000);
   });
 }
 
