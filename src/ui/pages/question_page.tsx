@@ -11,7 +11,7 @@ export default function QuestionPage() {
   const { id } = useParams();
 
   const loading = useAppSelector((state) => state.questions.loading);
-  const [question, authedUser, isAnswered] = useAppSelector((state) => {
+  const [question, isAnswered] = useAppSelector((state) => {
     const authedUser = state.authedUser.entities;
     let question: Question | null = null;
     let isAnswered: boolean = false;
@@ -22,7 +22,7 @@ export default function QuestionPage() {
         (question?.optionOne.votes.includes(authedUser) ||
           question?.optionTwo.votes.includes(authedUser));
     }
-    return [question, authedUser, isAnswered];
+    return [question, isAnswered];
   }, shallowEqual);
 
   const isLoading = loading === LoadingStatus.pending;
