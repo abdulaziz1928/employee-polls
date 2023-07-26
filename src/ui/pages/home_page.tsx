@@ -1,10 +1,11 @@
-import { Container, Tabs, Tab, Typography, Paper, Box } from "@mui/material";
+import { Container, Tabs, Tab, Paper, Box } from "@mui/material";
 import { useState } from "react";
 import TabPanel from "../components/home/tab_panel";
 import { useAppSelector } from "../..";
 import { shallowEqual } from "react-redux";
 import { sortQuestions, splitQuestions } from "../../state/utils/helpers";
 import QuestionPolls from "../components/home/polls";
+import Title from "../components/title";
 
 export default function HomePage() {
   const [value, setValue] = useState(0);
@@ -38,9 +39,7 @@ export default function HomePage() {
         borderRadius: "1rem",
       }}
     >
-      <Typography component="h1" variant="h3" align="center">
-        Home
-      </Typography>
+      <Title title="Home" />
 
       <Box
         component={Paper}

@@ -1,6 +1,7 @@
 import { Container, Typography } from "@mui/material";
 
 import LeaderboardTable from "../components/leaderboard/leaderboard_table";
+import Title from "../components/title";
 
 export default function LeaderboardPage() {
   return (
@@ -15,9 +16,7 @@ export default function LeaderboardPage() {
         borderRadius: "1rem",
       }}
     >
-      <Typography component="h1" variant="h3" align="center">
-        Leaderboard
-      </Typography>
+      <Title title="Leaderboard" />
       <LeaderboardTable />
     </Container>
   );

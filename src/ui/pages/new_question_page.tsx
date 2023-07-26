@@ -1,78 +1,52 @@
-import {
-  Box,
-  Container,
-  Typography,
-  TextField,
-  Button,
-  Stack,
-  FormControl,
-} from "@mui/material";
+import { Container, Stack, LinearProgress } from "@mui/material";
 import { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../..";
+import { useAppDispatch, useAppSelector } from "../..";
 import { handleAddQuestion } from "../../state/modules/questions/thunks/add_question";
+import LoadingStatus from "../../state/types/loading_status";
 import PageRoutes from "../../state/types/page_routes";
+import QuestionForm from "../components/new_question/question_form";
+import Title from "../components/title";
 export default function NewQuestionPage() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const handleOnSubmit = (event: FormEvent<HTMLFormElement>): void => {
+
+  const [loading, error] = useAppSelector((state) => [
+    state.questions.loading,
+    state.questions.error,
+  ]);
+
+  const isLoading = loading === LoadingStatus.pending;
+
+  const handleOnSubmit = async (
+    event: FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const optionOneText = data.get("optionOne")?.toString();
     const optionTwoText = data.get("optionTwo")?.toString();
-    dispatch(
+    await dispatch(
       handleAddQuestion({
         optionOneText: optionOneText!,
         optionTwoText: optionTwoText!,
       })
     );
-    navigate(PageRoutes.Home);
+    if (loading === LoadingStatus.failed) {
+      console.error(error);
+    } else {
+      navigate(PageRoutes.Home);
+    }
   };
 
   return (
-    <Container maxWidth="md" sx={{ my: 6 }}>
-      <Stack spacing={3}>
-        <Box>
-          <Typography component="h1" variant="h3" align="center">
-            Would You Rather
-          </Typography>
-          <Typography
-            component="h2"
-            variant="h4"
-            align="center"
-            color="text.secondary"
-            gutterBottom
-          >
-            Create Your Own Poll
-          </Typography>
-        </Box>
-
-        <Box component="form" onSubmit={handleOnSubmit}>
-          <FormControl fullWidth>
-            <Stack spacing={2}>
-              <TextField
-                id="optionOne"
-                label="Option One"
-                name="optionOne"
-                multiline
-                required
-                fullWidth
-              />
-              <TextField
-                id="optionTwo"
-                label="Option Two"
-                name="optionTwo"
-                multiline
-                required
-                fullWidth
-              />
-            </Stack>
-            <Button variant="contained" sx={{ my: 1 }} fullWidth type="submit">
-              <Typography variant="h6">Submit</Typography>
-            </Button>
-          </FormControl>
-        </Box>
-      </Stack>
-    </Container>
+    <>
+      {isLoading && <LinearProgress color="secondary" />}
+      <Container maxWidth="md" sx={{ my: 6 }}>
+        <Stack spacing={3}>
+          <Title title="Would You Rather" subTitle="Create Your Own Poll" />
+          <QuestionForm onSubmit={handleOnSubmit} isLoading={isLoading} />
+        </Stack>
+      </Container>
+    </>
   );
 }
