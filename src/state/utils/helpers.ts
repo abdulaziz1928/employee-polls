@@ -20,7 +20,7 @@ export function sortUsers(users: Record<string, User>) {
 }
 
 export function sortQuestions(questions: Record<string, Question>) {
-  return Object.values(questions).sort((a, b) => a.timestamp - b.timestamp);
+  return Object.values(questions).sort((a, b) => b.timestamp - a.timestamp);
 }
 
 export function formatDate(timestamp: number): string {

@@ -1,10 +1,10 @@
-import { Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 
 import LeaderboardTable from "../components/leaderboard/leaderboard_table";
 import Title from "../components/title";
 
 export default function LeaderboardPage() {
-  return (
+  return (  
     <Container
       maxWidth="md"
       sx={{
