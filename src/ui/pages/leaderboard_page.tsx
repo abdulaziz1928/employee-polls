@@ -1,10 +1,22 @@
-import { Container } from "@mui/material";
+import { Container, LinearProgress } from "@mui/material";
+import { useAppSelector } from "../..";
+import LoadingStatus from "../../state/types/loading_status";
+import { sortUsers } from "../../state/utils/helpers";
 
 import LeaderboardTable from "../components/leaderboard/leaderboard_table";
 import Title from "../components/title";
 
 export default function LeaderboardPage() {
-  return (  
+  const [users, loading] = useAppSelector((state) => [
+    state.users.entities,
+    state.users.loading,
+  ]);
+  const sortedUsers = sortUsers(users);
+
+  if (loading === LoadingStatus.idle) {
+    return <LinearProgress />;
+  }
+  return (
     <Container
       maxWidth="md"
       sx={{
@@ -17,7 +29,7 @@ export default function LeaderboardPage() {
       }}
     >
       <Title title="Leaderboard" />
-      <LeaderboardTable />
+      <LeaderboardTable users={sortedUsers} />
     </Container>
   );
 }

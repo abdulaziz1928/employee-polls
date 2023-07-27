@@ -1,4 +1,11 @@
-import { Container, Tabs, Tab, Paper, Box } from "@mui/material";
+import {
+  Container,
+  Tabs,
+  Tab,
+  Paper,
+  Box,
+  LinearProgress,
+} from "@mui/material";
 import { useState } from "react";
 import TabPanel from "../components/home/tab_panel";
 import { useAppSelector } from "../..";
@@ -6,12 +13,14 @@ import { shallowEqual } from "react-redux";
 import { sortQuestions, splitQuestions } from "../../state/utils/helpers";
 import QuestionPolls from "../components/home/polls";
 import Title from "../components/title";
+import LoadingStatus from "../../state/types/loading_status";
 
 export default function HomePage() {
   const [value, setValue] = useState(0);
 
-  const questions = sortQuestions(
-    useAppSelector((state) => state.questions.entities)
+  const [questions, loading] = useAppSelector(
+    (state) => [state.questions.entities, state.questions.loading],
+    shallowEqual
   );
   const userAnswers = useAppSelector((state) => {
     const authedUser = state.authedUser.entities;
@@ -20,11 +29,16 @@ export default function HomePage() {
     return answers;
   }, shallowEqual);
 
-  const [answered, unAnswered] = splitQuestions(questions, userAnswers);
+  const sortedQuestions = sortQuestions(questions);
+  const [answered, unAnswered] = splitQuestions(sortedQuestions, userAnswers);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+
+  if (loading === LoadingStatus.idle) {
+    return <LinearProgress />;
+  }
 
   return (
     <Container

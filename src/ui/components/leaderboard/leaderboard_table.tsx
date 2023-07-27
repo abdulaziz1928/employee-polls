@@ -10,14 +10,14 @@ import {
   Box,
   Avatar,
 } from "@mui/material";
-import { sortUsers } from "../../../state/utils/helpers";
-import { useAppSelector } from "../../..";
+import { User } from "../../../state/modules/users";
 
-export interface ILeaderboardTableProps {}
+export interface ILeaderboardTableProps {
+  users: User[];
+}
 
 export default function LeaderboardTable(props: ILeaderboardTableProps) {
-  const users = sortUsers(useAppSelector((state) => state.users.entities));
-
+  const { users } = props;
   return (
     <TableContainer
       component={Paper}

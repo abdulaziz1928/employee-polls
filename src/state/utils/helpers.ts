@@ -11,7 +11,7 @@ export function splitQuestions(
   );
 }
 
-export function sortUsers(users: Record<string, User>) {
+export function sortUsers(users: Record<string, User>): User[] {
   return Object.values(users).sort((a, b) => {
     const scoreA = Object.values(a.answers).length + a.questions.length;
     const scoreB = Object.values(b.answers).length + b.questions.length;
@@ -19,7 +19,7 @@ export function sortUsers(users: Record<string, User>) {
   });
 }
 
-export function sortQuestions(questions: Record<string, Question>) {
+export function sortQuestions(questions: Record<string, Question>): Question[] {
   return Object.values(questions).sort((a, b) => b.timestamp - a.timestamp);
 }
 

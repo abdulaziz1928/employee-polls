@@ -38,6 +38,11 @@ export default function NewQuestionPage() {
     }
   };
 
+  if (loading === LoadingStatus.idle) {
+    return <LinearProgress />;
+  }
+
+
   return (
     <>
       {isLoading && <LinearProgress color="secondary" />}

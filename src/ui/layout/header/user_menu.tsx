@@ -16,6 +16,8 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { toggleTheme } from "../../../state/modules/prefrences/prefrencesSlice";
+import { useNavigate } from "react-router-dom";
+import PageRoutes from "../../../state/types/page_routes";
 
 export interface IUserMenuProps {}
 
@@ -24,6 +26,7 @@ const mobileSettings = ["Toggle Theme"];
 
 export default function UserMenu(props: IUserMenuProps) {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
   const [user, darkThemeEnabled] = useAppSelector((state) => [
@@ -41,6 +44,7 @@ export default function UserMenu(props: IUserMenuProps) {
       switch (option) {
         case "logout":
           dispatch(logoutAuthedUser());
+          navigate(PageRoutes.Login, { replace: true });
           break;
         case "Toggle Theme":
           changeTheme();
