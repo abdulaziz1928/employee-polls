@@ -1,16 +1,14 @@
 import { Container, LinearProgress } from "@mui/material";
-import { useAppSelector } from "../..";
+
 import LoadingStatus from "../../state/types/loading_status";
 import { sortUsers } from "../../state/utils/helpers";
+import { useAppSelector } from "../app/hooks";
 
 import LeaderboardTable from "../components/leaderboard/leaderboard_table";
-import Title from "../components/title";
+import Title from "../components/common/title";
 
 export default function LeaderboardPage() {
-  const [users, loading] = useAppSelector((state) => [
-    state.users.entities,
-    state.users.loading,
-  ]);
+  const { entities: users, loading } = useAppSelector((state) => state.users);
   const sortedUsers = sortUsers(users);
 
   if (loading === LoadingStatus.idle) {

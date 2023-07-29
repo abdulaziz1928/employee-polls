@@ -1,13 +1,17 @@
 import Answer from "../types/answer";
 import { Question } from "../modules/questions";
 import { User } from "../modules/users";
+import sarah from "../../ui/assets/sarah.svg";
+import tyler from "../../ui/assets/tyler.svg";
+import mike from "../../ui/assets/mike.svg";
+import zenobia from "../../ui/assets/zenobia.svg";
 
 let users: Record<string, User> = {
   sarahedo: {
     id: "sarahedo",
     password: "password123",
     name: "Sarah Edo",
-    avatarURL: null,
+    avatarURL: sarah,
     answers: {
       "8xf0y6ziyjabvozdd253nd": "optionOne",
       "6ni6ok3ym7mf1p33lnez": "optionOne",
@@ -20,7 +24,7 @@ let users: Record<string, User> = {
     id: "tylermcginnis",
     password: "abc321",
     name: "Tyler McGinnis",
-    avatarURL: null,
+    avatarURL: tyler,
     answers: {
       vthrdm985a262al8qx3do: "optionOne",
       xj352vofupe1dqz9emx13r: "optionTwo",
@@ -31,7 +35,7 @@ let users: Record<string, User> = {
     id: "mtsamis",
     password: "xyz123",
     name: "Mike Tsamis",
-    avatarURL: null,
+    avatarURL: mike,
     answers: {
       xj352vofupe1dqz9emx13r: "optionOne",
       vthrdm985a262al8qx3do: "optionTwo",
@@ -43,7 +47,7 @@ let users: Record<string, User> = {
     id: "zoshikanlu",
     password: "pass246",
     name: "Zenobia Oshikanlu",
-    avatarURL: null,
+    avatarURL: zenobia,
     answers: {
       xj352vofupe1dqz9emx13r: "optionOne",
     },
@@ -242,4 +246,3 @@ export function _saveQuestionAnswer({
     }, 1000);
   });
 }
-

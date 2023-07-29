@@ -5,7 +5,7 @@ import {
   LinearProgress,
   linearProgressClasses,
 } from "@mui/material";
-import { useAppSelector } from "../../..";
+import { useAppSelector } from "../../app/hooks";
 import { Option } from "../../../state/modules/questions";
 
 export interface IOptionResultsProps {
@@ -27,6 +27,7 @@ export default function OptionResults(props: IOptionResultsProps) {
     <Box width="100%">
       <Stack direction="row" width="100%" justifyContent="space-between">
         <Typography>{option.text}</Typography>
+        {/* small devices and up */}
         <Box
           sx={{ display: { xs: "none", sm: "flex" } }}
           display="flex"
@@ -48,7 +49,6 @@ export default function OptionResults(props: IOptionResultsProps) {
           borderRadius: "0.5rem",
           [`& .${linearProgressClasses.bar}`]: {
             borderRadius: "0.5rem",
-            animationDuration: "8s",
           },
         }}
         color={isVoted ? "success" : "primary"}
@@ -61,7 +61,7 @@ export default function OptionResults(props: IOptionResultsProps) {
             Your Vote!
           </Typography>
         )}
-
+        {/* x-small devices */}
         <Box
           sx={{
             display: { xs: "inhirit", sm: "none" },

@@ -4,15 +4,17 @@ import { handleAnswerQuestion } from "../../../state/modules/questions/thunks/an
 import { Question, Option } from "../../../state/modules/questions";
 import LoadingStatus from "../../../state/types/loading_status";
 import OptionChoice from "./option_choice";
-import { useAppDispatch } from "../../..";
+import { useAppDispatch } from "../../app/hooks";
+import { User } from "../../../state/modules/users";
 
 export interface IAnswerQuestionProps {
   question: Question;
+  poster?: User | null;
   loading: LoadingStatus;
 }
 
 export default function AnswerQuestion(props: IAnswerQuestionProps) {
-  const { question, loading } = props;
+  const { question, poster, loading } = props;
   const { id, author, optionOne, optionTwo } = question;
   const isLoading = loading === LoadingStatus.pending;
 
@@ -36,9 +38,11 @@ export default function AnswerQuestion(props: IAnswerQuestionProps) {
     >
       <Stack alignItems="center" gap={4}>
         <Typography component="h1" variant="h3" align="center">
-          Poll By {author}
+          Poll By {poster?.name ?? author}
         </Typography>
         <Avatar
+          src={poster?.avatarURL}
+          alt={author}
           sx={{
             width: { lg: "12rem", md: "8rem", xs: "6rem" },
             height: { lg: "12rem", md: "8rem", xs: "6rem" },

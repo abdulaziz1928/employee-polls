@@ -8,26 +8,23 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import TabPanel from "../components/home/tab_panel";
-import { useAppSelector } from "../..";
-import { shallowEqual } from "react-redux";
+import { useAppSelector } from "../app/hooks";
 import { sortQuestions, splitQuestions } from "../../state/utils/helpers";
 import QuestionPolls from "../components/home/polls";
-import Title from "../components/title";
+import Title from "../components/common/title";
 import LoadingStatus from "../../state/types/loading_status";
 
 export default function HomePage() {
   const [value, setValue] = useState(0);
 
-  const [questions, loading] = useAppSelector(
-    (state) => [state.questions.entities, state.questions.loading],
-    shallowEqual
+  const { entities: questions, loading } = useAppSelector(
+    (state) => state.questions
   );
   const userAnswers = useAppSelector((state) => {
     const authedUser = state.authedUser.entities;
-    const answers =
-      authedUser === null ? {} : state.users.entities[authedUser].answers;
-    return answers;
-  }, shallowEqual);
+    const userAnswers = state.users.entities[authedUser!].answers;
+    return userAnswers;
+  });
 
   const sortedQuestions = sortQuestions(questions);
   const [answered, unAnswered] = splitQuestions(sortedQuestions, userAnswers);
@@ -48,7 +45,6 @@ export default function HomePage() {
         py: 3,
         display: "flex",
         flexDirection: "column",
-
         gap: 3,
         borderRadius: "1rem",
       }}

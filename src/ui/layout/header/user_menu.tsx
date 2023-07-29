@@ -1,5 +1,5 @@
 import { useState, MouseEvent } from "react";
-import { useAppDispatch, useAppSelector } from "../../..";
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { logoutAuthedUser } from "../../../state/modules/authedUser";
 import {
   Box,
@@ -18,21 +18,23 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { toggleTheme } from "../../../state/modules/prefrences/prefrencesSlice";
 import { useNavigate } from "react-router-dom";
 import PageRoutes from "../../../state/types/page_routes";
-
-export interface IUserMenuProps {}
+import { shallowEqual } from "react-redux";
 
 const settings = ["logout"];
 const mobileSettings = ["Toggle Theme"];
 
-export default function UserMenu(props: IUserMenuProps) {
+export default function UserMenu() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
-  const [user, darkThemeEnabled] = useAppSelector((state) => [
-    state.users.entities[state.authedUser.entities!],
-    state.prefrences.darkthemeEnabled,
-  ]);
+  const [user, darkThemeEnabled] = useAppSelector(
+    (state) => [
+      state.users.entities[state.authedUser.entities!],
+      state.prefrences.darkthemeEnabled,
+    ],
+    shallowEqual
+  );
 
   const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -70,7 +72,7 @@ export default function UserMenu(props: IUserMenuProps) {
           <Box sx={{ display: "flex", gap: "0.5rem" }}>
             <Avatar
               alt={user.name}
-              src={user.avatarURL ?? user.name}
+              src={user.avatarURL}
               sx={{ width: "2.25rem", height: "2.25rem" }}
             />
             <Typography

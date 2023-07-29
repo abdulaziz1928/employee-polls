@@ -2,13 +2,15 @@ import { Typography, Container, Avatar, Stack, Paper } from "@mui/material";
 import { Question } from "../../../state/modules/questions";
 
 import OptionResults from "./option_results";
+import { User } from "../../../state/modules/users";
 
 export interface IQuestionResultsProps {
   question: Question;
+  poster?: User | null;
 }
 
 export default function QuestionResults(props: IQuestionResultsProps) {
-  const { question } = props;
+  const { question, poster } = props;
   const { optionOne, optionTwo, author } = question;
   const overallVotes = optionOne.votes.length + optionTwo.votes.length;
   return (
@@ -25,9 +27,11 @@ export default function QuestionResults(props: IQuestionResultsProps) {
     >
       <Stack alignItems="center" gap={4}>
         <Typography component="h1" variant="h3" align="center">
-          Poll By {author}
+          Poll By {poster?.name ?? author}
         </Typography>
         <Avatar
+          src={poster?.avatarURL}
+          alt={author}
           sx={{
             width: { lg: "12rem", md: "8rem", xs: "6rem" },
             height: { lg: "12rem", md: "8rem", xs: "6rem" },

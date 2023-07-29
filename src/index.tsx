@@ -3,13 +3,10 @@ import App from "./ui/app/App";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { store, RootState, AppDispatch } from "./state/store";
-import { BrowserRouter } from "react-router-dom";
-import DarkThemeProvider from "./ui/components/theme_provider";
 
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-export const useAppDispatch: () => AppDispatch = useDispatch;
+import { store } from "./state/store";
+import { BrowserRouter } from "react-router-dom";
+import DarkThemeProvider from "./ui/theme/theme_provider";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

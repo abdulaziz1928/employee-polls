@@ -11,15 +11,13 @@ import { MouseEvent, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useLocation, useNavigate } from "react-router-dom";
 
-export interface INavMenuProps {}
-
 const pages = [
   { name: "Home", route: PageRoutes.Home },
   { name: "Leaderboard", route: PageRoutes.Leaderboard },
   { name: "New", route: PageRoutes.New },
 ];
 
-export default function NavMenu(props: INavMenuProps) {
+export default function NavMenu() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const navigte = useNavigate();
   const location = useLocation();

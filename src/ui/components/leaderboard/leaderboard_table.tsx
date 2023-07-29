@@ -69,6 +69,8 @@ export default function LeaderboardTable(props: ILeaderboardTableProps) {
                   <TableCell colSpan={2}>
                     <Box sx={{ display: "flex", gap: 1 }}>
                       <Avatar
+                        src={user.avatarURL}
+                        alt={user.name}
                         sx={{ display: { xs: "none", sm: "flex" } }}
                       ></Avatar>
                       <Box sx={{ flexDirection: "column" }}>

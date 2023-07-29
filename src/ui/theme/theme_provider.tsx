@@ -1,13 +1,13 @@
 import { ThemeProvider, responsiveFontSizes } from "@mui/material";
 import { ReactNode } from "react";
-import { useAppSelector } from "../..";
-import { darkTheme, theme } from "../styles/theme/theme";
+import { darkTheme, theme } from "./theme";
+import { useAppSelector } from "../app/hooks";
 
 export interface IDarkThemeProviderProps {
   children?: ReactNode;
 }
 
-const DarkThemeProvider = (props: IDarkThemeProviderProps) => {
+export default function DarkThemeProvider(props: IDarkThemeProviderProps) {
   const { children } = props;
   const darkThemeEnabled = useAppSelector(
     (state) => state.prefrences.darkthemeEnabled
@@ -19,6 +19,4 @@ const DarkThemeProvider = (props: IDarkThemeProviderProps) => {
       {children}
     </ThemeProvider>
   );
-};
-
-export default DarkThemeProvider;
+}

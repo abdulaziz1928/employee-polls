@@ -1,20 +1,17 @@
 import { Container, Stack, LinearProgress } from "@mui/material";
 import { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../..";
 import { handleAddQuestion } from "../../state/modules/questions/thunks/add_question";
 import LoadingStatus from "../../state/types/loading_status";
 import PageRoutes from "../../state/types/page_routes";
 import QuestionForm from "../components/new_question/question_form";
-import Title from "../components/title";
+import Title from "../components/common/title";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 export default function NewQuestionPage() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const [loading, error] = useAppSelector((state) => [
-    state.questions.loading,
-    state.questions.error,
-  ]);
+  const { loading, error } = useAppSelector((state) => state.questions);
 
   const isLoading = loading === LoadingStatus.pending;
 
@@ -37,11 +34,6 @@ export default function NewQuestionPage() {
       navigate(PageRoutes.Home);
     }
   };
-
-  if (loading === LoadingStatus.idle) {
-    return <LinearProgress />;
-  }
-
 
   return (
     <>

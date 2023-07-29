@@ -10,6 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import { Question } from "../../../state/modules/questions";
 import { formatDate } from "../../../state/utils/helpers";
+import { useAppSelector } from "../../app/hooks";
 
 export interface IPollCardProps {
   question: Question;
@@ -19,6 +20,10 @@ export interface IPollCardProps {
 export default function PollCard(props: IPollCardProps) {
   const { question, isAnswered } = props;
   const { author, optionOne, optionTwo, timestamp, id } = question;
+
+  const { name, avatarURL } = useAppSelector(
+    (state) => state.users.entities[author]
+  );
 
   const date = formatDate(timestamp);
   return (
@@ -33,6 +38,8 @@ export default function PollCard(props: IPollCardProps) {
         }}
       >
         <Avatar
+          src={avatarURL}
+          alt={name}
           sx={{
             width: "auto",
             height: "100%",
@@ -43,7 +50,7 @@ export default function PollCard(props: IPollCardProps) {
         <Box display="flex" justifyContent="space-between" flexWrap="wrap">
           <Box>
             <Typography component="span" color="primary">
-              @{author}
+              {name}
             </Typography>
             <Typography component="span"> asks</Typography>
           </Box>

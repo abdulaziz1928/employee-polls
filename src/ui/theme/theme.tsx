@@ -29,6 +29,9 @@ export const theme = createTheme({
       "800": "#7a00c5",
       "900": "#4f00ba",
     },
+    success: {
+      main: "#50C878",
+    },
     background: {
       default: "#f2f2f2",
     },
