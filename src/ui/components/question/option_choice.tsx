@@ -40,6 +40,7 @@ export default function OptionChoice(props: IOptionChoiceProps) {
           submitChoice(option);
         }}
         loading={voted && isLoading}
+        disabled={isLoading}
         loadingPosition="center"
       >
         <Typography>Click</Typography>
