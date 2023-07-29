@@ -1,7 +1,6 @@
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "./hooks";
+import { useAppDispatch } from "./hooks";
 import { handleInitialData } from "../../state/modules/shared/actions";
-import Header from "../layout/header/header";
 import { CssBaseline } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
 import PageRoutes from "../../state/types/page_routes";

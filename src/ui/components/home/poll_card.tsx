@@ -77,7 +77,7 @@ export default function PollCard(props: IPollCardProps) {
         </Typography>
         <Button
           component={Link}
-          to={`question/${id}`}
+          to={`questions/${id}`}
           fullWidth
           variant="contained"
           color={isAnswered ? "secondary" : "primary"}

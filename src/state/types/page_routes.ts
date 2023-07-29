@@ -1,8 +1,8 @@
 enum PageRoutes {
   Home = "/",
   Leaderboard = "/leaderboard",
-  Question = "/question/:id",
-  New = "/question/new",
+  Question = "/questions/:id",
+  New = "/new",
   Login = "/login",
 }
 export default PageRoutes;
