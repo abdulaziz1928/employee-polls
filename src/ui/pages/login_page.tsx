@@ -20,14 +20,20 @@ import { setAuthedUser } from "../../state/modules/authedUser";
 import { useLocation, useNavigate } from "react-router-dom";
 import PageRoutes from "../../state/types/page_routes";
 import LoadingStatus from "../../state/types/loading_status";
-
+interface LocationState {
+  prevRoute: string;
+}
 export default function Signin() {
   const [user, setUser] = useState<string | null>();
   const { entities: users, loading } = useAppSelector((state) => state.users);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { state } = useLocation();
+  const location = useLocation();
+
+  const { prevRoute: route } = (location.state as LocationState) || {
+    prevRoute: PageRoutes.Home,
+  };
 
   const isLoading = loading === LoadingStatus.idle;
 
@@ -40,11 +46,7 @@ export default function Signin() {
 
     if (user) {
       dispatch(setAuthedUser(user));
-      if (state.prevRoute) {
-        navigate(state.prevRoute, { replace: true });
-      } else {
-        navigate(PageRoutes.Home, { replace: true });
-      }
+      navigate(route, { replace: true });
     }
   };
 

@@ -6,7 +6,7 @@ import Header from "../../layout/header/header";
 export default function PrivateRoutes() {
   const authedUser = useAppSelector((state) => state.authedUser.entities);
   const currentPath = useLocation().pathname;
-  let path: string | null = null;
+  let path: string | undefined;
 
   if (currentPath !== PageRoutes.Login) path = currentPath;
 
