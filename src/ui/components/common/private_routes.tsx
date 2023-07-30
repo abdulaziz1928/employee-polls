@@ -1,10 +1,14 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAppSelector } from "../../app/hooks";
 import PageRoutes from "../../../state/types/page_routes";
 import Header from "../../layout/header/header";
 
 export default function PrivateRoutes() {
   const authedUser = useAppSelector((state) => state.authedUser.entities);
+  const currentPath = useLocation().pathname;
+  let path: string | null = null;
+
+  if (currentPath !== PageRoutes.Login) path = currentPath;
 
   return authedUser ? (
     <>
@@ -12,6 +16,6 @@ export default function PrivateRoutes() {
       <Outlet />
     </>
   ) : (
-    <Navigate to={PageRoutes.Login} />
+    <Navigate to={PageRoutes.Login} state={{ prevRoute: path }} />
   );
 }

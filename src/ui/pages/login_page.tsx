@@ -17,7 +17,7 @@ import { FormEvent, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import Title from "../components/common/title";
 import { setAuthedUser } from "../../state/modules/authedUser";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import PageRoutes from "../../state/types/page_routes";
 import LoadingStatus from "../../state/types/loading_status";
 
@@ -27,6 +27,7 @@ export default function Signin() {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   const isLoading = loading === LoadingStatus.idle;
 
@@ -39,7 +40,11 @@ export default function Signin() {
 
     if (user) {
       dispatch(setAuthedUser(user));
-      navigate(PageRoutes.Home, { replace: true });
+      if (state.prevRoute) {
+        navigate(state.prevRoute, { replace: true });
+      } else {
+        navigate(PageRoutes.Home, { replace: true });
+      }
     }
   };
 
