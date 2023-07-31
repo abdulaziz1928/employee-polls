@@ -3,9 +3,10 @@ import questions from "./modules/questions";
 import users from "./modules/users";
 import logger from "./middlewares/logger";
 import prefrences from "./modules/prefrences/prefrencesSlice";
+import snackbar from "./modules/snackbar/snackbarSlice";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
-const reducers = { authedUser, users, questions, prefrences };
+const reducers = { authedUser, users, questions, prefrences, snackbar };
 
 const rootReducer = combineReducers(reducers);
 

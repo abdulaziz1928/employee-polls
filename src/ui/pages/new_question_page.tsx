@@ -7,6 +7,7 @@ import PageRoutes from "../../state/types/page_routes";
 import QuestionForm from "../components/new_question/question_form";
 import Title from "../components/common/title";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { setSnackbar } from "../../state/modules/snackbar/snackbarSlice";
 export default function NewQuestionPage() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -31,6 +32,7 @@ export default function NewQuestionPage() {
     if (loading === LoadingStatus.failed) {
       console.error(error);
     } else {
+      dispatch(setSnackbar("Poll submitted successfully!"));
       navigate(PageRoutes.Home);
     }
   };

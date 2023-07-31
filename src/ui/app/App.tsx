@@ -10,6 +10,7 @@ import NewQuestionPage from "../pages/new_question_page";
 import QuestionPage from "../pages/question_page";
 import Signin from "../pages/login_page";
 import PrivateRoutes from "../components/common/private_routes";
+import SuccessSnackbar from "../components/common/success_snackbar";
 
 export default function App() {
   const dispatch = useAppDispatch();
@@ -19,6 +20,7 @@ export default function App() {
   return (
     <>
       <CssBaseline />
+      <SuccessSnackbar />
       <Routes>
         <Route element={<PrivateRoutes />}>
           <Route path={PageRoutes.Home} element={<HomePage />} />

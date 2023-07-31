@@ -6,6 +6,7 @@ import LoadingStatus from "../../../state/types/loading_status";
 import OptionChoice from "./option_choice";
 import { useAppDispatch } from "../../app/hooks";
 import { User } from "../../../state/modules/users";
+import { setSnackbar } from "../../../state/modules/snackbar/snackbarSlice";
 
 export interface IAnswerQuestionProps {
   question: Question;
@@ -22,7 +23,9 @@ export default function AnswerQuestion(props: IAnswerQuestionProps) {
 
   const handleSubmitChoice = (option: Option) => {
     const answer = option === optionOne ? Answer.optionOne : Answer.optionTwo;
-    dispatch(handleAnswerQuestion({ qid: id!, answer: answer }));
+    dispatch(handleAnswerQuestion({ qid: id!, answer: answer })).then(() =>
+      dispatch(setSnackbar("vote submitted successfully!"))
+    );
   };
   return (
     <Container
