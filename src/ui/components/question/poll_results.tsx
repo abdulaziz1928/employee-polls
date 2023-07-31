@@ -4,12 +4,12 @@ import { Question } from "../../../state/modules/questions";
 import OptionResults from "./option_results";
 import { User } from "../../../state/modules/users";
 
-export interface IQuestionResultsProps {
+export interface IPollResultsProps {
   question: Question;
   poster?: User | null;
 }
 
-export default function QuestionResults(props: IQuestionResultsProps) {
+export default function PollResults(props: IPollResultsProps) {
   const { question, poster } = props;
   const { optionOne, optionTwo, author } = question;
   const overallVotes = optionOne.votes.length + optionTwo.votes.length;

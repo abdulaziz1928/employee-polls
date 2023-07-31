@@ -8,13 +8,13 @@ import { useAppDispatch } from "../../app/hooks";
 import { User } from "../../../state/modules/users";
 import { setSnackbar } from "../../../state/modules/snackbar/snackbarSlice";
 
-export interface IAnswerQuestionProps {
+export interface IAnswerPollProps {
   question: Question;
   poster?: User | null;
   loading: LoadingStatus;
 }
 
-export default function AnswerQuestion(props: IAnswerQuestionProps) {
+export default function AnswerPoll(props: IAnswerPollProps) {
   const { question, poster, loading } = props;
   const { id, author, optionOne, optionTwo } = question;
   const isLoading = loading === LoadingStatus.pending;

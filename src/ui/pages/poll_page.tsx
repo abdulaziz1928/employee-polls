@@ -2,15 +2,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Box, LinearProgress } from "@mui/material";
 import { Question } from "../../state/modules/questions";
 import LoadingStatus from "../../state/types/loading_status";
-import AnswerQuestion from "../components/question/answer_question";
+import AnswerPoll from "../components/question/answer_poll";
 import { useAppSelector } from "../app/hooks";
 import { shallowEqual } from "react-redux";
-import QuestionResults from "../components/question/question_results";
+import PollResults from "../components/question/poll_results";
 import { User } from "../../state/modules/users";
 import PageRoutes from "../../state/types/page_routes";
 import { useEffect } from "react";
 
-export default function QuestionPage() {
+export default function PollPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const loading = useAppSelector((state) => state.questions.loading);
@@ -52,9 +52,9 @@ export default function QuestionPage() {
     <>
       {isLoading && <LinearProgress color="secondary" />}
       {isAnswered ? (
-        <QuestionResults question={question} poster={poster} />
+        <PollResults question={question} poster={poster} />
       ) : (
-        <AnswerQuestion question={question} poster={poster} loading={loading} />
+        <AnswerPoll question={question} poster={poster} loading={loading} />
       )}
     </>
   );

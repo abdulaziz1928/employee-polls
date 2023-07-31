@@ -2,12 +2,12 @@ import { LoadingButton } from "@mui/lab";
 import { Box, FormControl, Stack, TextField, Typography } from "@mui/material";
 import { FormEvent } from "react";
 
-export interface IQuestionFormProps {
+export interface IPollFormProps {
   onSubmit: (event: FormEvent<HTMLFormElement>) => Promise<void>;
   isLoading: boolean;
 }
 
-export default function QuestionForm(props: IQuestionFormProps) {
+export default function PollForm(props: IPollFormProps) {
   const { onSubmit, isLoading } = props;
 
   return (

@@ -4,11 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { handleAddQuestion } from "../../state/modules/questions/thunks/add_question";
 import LoadingStatus from "../../state/types/loading_status";
 import PageRoutes from "../../state/types/page_routes";
-import QuestionForm from "../components/new_question/question_form";
+import PollForm from "../components/new_poll/poll_form";
 import Title from "../components/common/title";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { setSnackbar } from "../../state/modules/snackbar/snackbarSlice";
-export default function NewQuestionPage() {
+
+export default function NewPollPage() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -43,7 +44,7 @@ export default function NewQuestionPage() {
       <Container maxWidth="md" sx={{ my: 6 }}>
         <Stack spacing={3}>
           <Title title="Would You Rather" subTitle="Create Your Own Poll" />
-          <QuestionForm onSubmit={handleOnSubmit} isLoading={isLoading} />
+          <PollForm onSubmit={handleOnSubmit} isLoading={isLoading} />
         </Stack>
       </Container>
     </>
