@@ -7,12 +7,12 @@ import {
   LinearProgress,
 } from "@mui/material";
 import { useState } from "react";
-import TabPanel from "../components/home/tab_panel";
-import { useAppSelector } from "../app/hooks";
-import { sortQuestions, splitQuestions } from "../../state/utils/helpers";
-import QuestionPolls from "../components/home/polls";
-import Title from "../components/common/title";
-import LoadingStatus from "../../state/types/loading_status";
+import TabPanel from "./components/tab_panel";
+import { useAppSelector } from "../../app/hooks";
+import { sortQuestions, splitQuestions } from "../../../state/utils/helpers";
+import QuestionPolls from "./components/polls";
+import Title from "../common/title";
+import LoadingStatus from "../../../state/types/loading_status";
 
 export default function HomePage() {
   const [value, setValue] = useState(0);
@@ -39,6 +39,7 @@ export default function HomePage() {
 
   return (
     <Container
+      data-testid="home-container"
       sx={{
         maxWidth: { md: "md", lg: "lg" },
         my: 3,

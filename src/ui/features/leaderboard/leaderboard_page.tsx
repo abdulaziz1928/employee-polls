@@ -1,11 +1,11 @@
 import { Container, LinearProgress } from "@mui/material";
 
-import LoadingStatus from "../../state/types/loading_status";
-import { sortUsers } from "../../state/utils/helpers";
-import { useAppSelector } from "../app/hooks";
+import LoadingStatus from "../../../state/types/loading_status";
+import { sortUsers } from "../../../state/utils/helpers";
+import { useAppSelector } from "../../app/hooks";
 
-import LeaderboardTable from "../components/leaderboard/leaderboard_table";
-import Title from "../components/common/title";
+import LeaderboardTable from "./components/leaderboard_table";
+import Title from "../common/title";
 
 export default function LeaderboardPage() {
   const { entities: users, loading } = useAppSelector((state) => state.users);

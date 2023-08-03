@@ -28,7 +28,7 @@ export default function SuccessSnackbar() {
       onClose={handleClose}
       message={<Typography color="white">{message}</Typography>}
       action={[
-        <IconButton onClick={handleClose}>
+        <IconButton key={message} onClick={handleClose}>
           <CloseIcon sx={{ color: "white" }} />
         </IconButton>,
       ]}

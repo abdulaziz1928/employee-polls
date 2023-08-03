@@ -1,13 +1,13 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { Box, LinearProgress } from "@mui/material";
-import { Question } from "../../state/modules/questions";
-import LoadingStatus from "../../state/types/loading_status";
-import AnswerPoll from "../components/question/answer_poll";
-import { useAppSelector } from "../app/hooks";
+import { Question } from "../../../state/modules/questions";
+import LoadingStatus from "../../../state/types/loading_status";
+import AnswerPoll from "./components/answer_poll";
+import { useAppSelector } from "../../app/hooks";
 import { shallowEqual } from "react-redux";
-import PollResults from "../components/question/poll_results";
-import { User } from "../../state/modules/users";
-import PageRoutes from "../../state/types/page_routes";
+import PollResults from "./components/poll_results";
+import { User } from "../../../state/modules/users";
+import PageRoutes from "../../../state/types/page_routes";
 import { useEffect } from "react";
 
 export default function PollPage() {

@@ -1,4 +1,4 @@
-import { Question } from "../../../state/modules/questions";
+import { Question } from "../../../../state/modules/questions";
 import { Grid } from "@mui/material";
 import PollCard from "./poll_card";
 

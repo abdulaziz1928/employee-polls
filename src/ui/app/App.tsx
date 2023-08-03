@@ -4,14 +4,14 @@ import { handleInitialData } from "../../state/modules/shared/actions";
 import { CssBaseline } from "@mui/material";
 import { Routes, Route, Navigate } from "react-router-dom";
 import PageRoutes from "../../state/types/page_routes";
-import HomePage from "../pages/home_page";
-import LeaderboardPage from "../pages/leaderboard_page";
-import NewPollPage from "../pages/new_poll_page";
-import PollPage from "../pages/poll_page";
-import Signin from "../pages/login_page";
-import PrivateRoutes from "../components/common/private_routes";
-import SuccessSnackbar from "../components/common/success_snackbar";
-import NotFoundPage from "../pages/not_found_page";
+import HomePage from "../features/home/home_page";
+import LeaderboardPage from "../features/leaderboard/leaderboard_page";
+import NewPollPage from "../features/new_poll/new_poll_page";
+import PollPage from "../features/poll/poll_page";
+import Signin from "../features/login/login_page";
+import PrivateRoutes from "../features/common/private_routes";
+import SuccessSnackbar from "../features/common/success_snackbar";
+import NotFoundPage from "../features/not_found/not_found_page";
 
 export default function App() {
   const dispatch = useAppDispatch();

@@ -5,8 +5,8 @@ import {
   LinearProgress,
   linearProgressClasses,
 } from "@mui/material";
-import { useAppSelector } from "../../app/hooks";
-import { Option } from "../../../state/modules/questions";
+import { useAppSelector } from "../../../app/hooks";
+import { Option } from "../../../../state/modules/questions";
 
 export interface IOptionResultsProps {
   option: Option;

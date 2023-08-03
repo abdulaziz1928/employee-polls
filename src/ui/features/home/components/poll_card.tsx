@@ -8,9 +8,9 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { Question } from "../../../state/modules/questions";
-import { formatDate } from "../../../state/utils/helpers";
-import { useAppSelector } from "../../app/hooks";
+import { Question } from "../../../../state/modules/questions";
+import { formatDate } from "../../../../state/utils/helpers";
+import { useAppSelector } from "../../../app/hooks";
 
 export interface IPollCardProps {
   question: Question;

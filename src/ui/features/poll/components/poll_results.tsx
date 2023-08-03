@@ -1,8 +1,8 @@
 import { Typography, Container, Avatar, Stack, Paper } from "@mui/material";
-import { Question } from "../../../state/modules/questions";
+import { Question } from "../../../../state/modules/questions";
 
 import OptionResults from "./option_results";
-import { User } from "../../../state/modules/users";
+import { User } from "../../../../state/modules/users";
 
 export interface IPollResultsProps {
   question: Question;
@@ -16,6 +16,7 @@ export default function PollResults(props: IPollResultsProps) {
   return (
     <Container
       maxWidth="md"
+      data-testid="poll-results-container"
       sx={{
         my: 3,
         py: 3,

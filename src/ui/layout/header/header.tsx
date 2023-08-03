@@ -4,7 +4,7 @@ import UserMenu from "./user_menu";
 
 export default function Header() {
   return (
-    <AppBar position="sticky" color="primary">
+    <AppBar data-testid="header-appbar" position="sticky" color="primary">
       <Toolbar variant="dense">
         <NavMenu />
         <UserMenu />

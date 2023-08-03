@@ -10,7 +10,7 @@ import {
   Box,
   Avatar,
 } from "@mui/material";
-import { User } from "../../../state/modules/users";
+import { User } from "../../../../state/modules/users";
 
 export interface ILeaderboardTableProps {
   users: User[];

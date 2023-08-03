@@ -4,7 +4,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 
-import { store } from "./state/store";
+import { setupStore } from "./state/store";
 import { BrowserRouter } from "react-router-dom";
 import DarkThemeProvider from "./ui/theme/theme_provider";
 
@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <Provider store={store}>
+  <Provider store={setupStore()}>
     <BrowserRouter>
       <DarkThemeProvider>
         <App />

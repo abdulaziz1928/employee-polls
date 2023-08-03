@@ -1,16 +1,17 @@
 import { Box, Paper, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import { Option } from "../../../state/modules/questions";
+import { Option } from "../../../../state/modules/questions";
 import { useState } from "react";
 
 export interface IOptionChoiceProps {
+  optionNum: string;
   option: Option;
   isLoading: boolean;
   submitChoice: (option: Option) => void;
 }
 
 export default function OptionChoice(props: IOptionChoiceProps) {
-  const { option, isLoading, submitChoice } = props;
+  const { optionNum, option, isLoading, submitChoice } = props;
   const [voted, setVoted] = useState<boolean>(false);
   return (
     <>
@@ -33,6 +34,7 @@ export default function OptionChoice(props: IOptionChoiceProps) {
       </Box>
       <LoadingButton
         variant="contained"
+        data-testid={`submit-choice-${optionNum}-container`}
         sx={{ py: 1.5 }}
         fullWidth
         onClick={() => {

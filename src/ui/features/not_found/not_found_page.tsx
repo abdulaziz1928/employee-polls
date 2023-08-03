@@ -1,5 +1,5 @@
 import { Container } from "@mui/material";
-import Title from "../components/common/title";
+import Title from "../common/title";
 
 export default function NotFoundPage() {
   return (

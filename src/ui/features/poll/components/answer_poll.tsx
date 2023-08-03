@@ -1,12 +1,12 @@
 import { Avatar, Grid, Stack, Typography, Container } from "@mui/material";
-import Answer from "../../../state/types/answer";
-import { handleAnswerQuestion } from "../../../state/modules/questions/thunks/answer_question";
-import { Question, Option } from "../../../state/modules/questions";
-import LoadingStatus from "../../../state/types/loading_status";
+import Answer from "../../../../state/types/answer";
+import { handleAnswerQuestion } from "../../../../state/modules/questions/thunks/answer_question";
+import { Question, Option } from "../../../../state/modules/questions";
+import LoadingStatus from "../../../../state/types/loading_status";
 import OptionChoice from "./option_choice";
-import { useAppDispatch } from "../../app/hooks";
-import { User } from "../../../state/modules/users";
-import { setSnackbar } from "../../../state/modules/snackbar/snackbarSlice";
+import { useAppDispatch } from "../../../app/hooks";
+import { User } from "../../../../state/modules/users";
+import { setSnackbar } from "../../../../state/modules/snackbar/snackbarSlice";
 
 export interface IAnswerPollProps {
   question: Question;
@@ -29,6 +29,7 @@ export default function AnswerPoll(props: IAnswerPollProps) {
   };
   return (
     <Container
+      data-testid="answer-poll-container"
       sx={{
         maxWidth: { md: "md", lg: "lg", xl: "xl" },
         my: 3,
@@ -57,6 +58,7 @@ export default function AnswerPoll(props: IAnswerPollProps) {
         <Grid container spacing={4} alignItems="center">
           <Grid item xs={12} lg={5.5}>
             <OptionChoice
+              optionNum="one"
               option={optionOne}
               isLoading={isLoading}
               submitChoice={handleSubmitChoice}
@@ -74,6 +76,7 @@ export default function AnswerPoll(props: IAnswerPollProps) {
           </Grid>
           <Grid item xs={12} lg={5.5}>
             <OptionChoice
+              optionNum="two"
               option={optionTwo}
               isLoading={isLoading}
               submitChoice={handleSubmitChoice}

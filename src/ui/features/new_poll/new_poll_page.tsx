@@ -1,13 +1,13 @@
 import { Container, Stack, LinearProgress } from "@mui/material";
 import { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { handleAddQuestion } from "../../state/modules/questions/thunks/add_question";
-import LoadingStatus from "../../state/types/loading_status";
-import PageRoutes from "../../state/types/page_routes";
-import PollForm from "../components/new_poll/poll_form";
-import Title from "../components/common/title";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { setSnackbar } from "../../state/modules/snackbar/snackbarSlice";
+import { handleAddQuestion } from "../../../state/modules/questions/thunks/add_question";
+import LoadingStatus from "../../../state/types/loading_status";
+import PageRoutes from "../../../state/types/page_routes";
+import PollForm from "./components/poll_form";
+import Title from "../common/title";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { setSnackbar } from "../../../state/modules/snackbar/snackbarSlice";
 
 export default function NewPollPage() {
   const navigate = useNavigate();

@@ -14,12 +14,12 @@ import {
   InputLabel,
 } from "@mui/material";
 import { FormEvent, useState } from "react";
-import { useAppSelector, useAppDispatch } from "../app/hooks";
-import Title from "../components/common/title";
-import { setAuthedUser } from "../../state/modules/authedUser";
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import Title from "../common/title";
+import { setAuthedUser } from "../../../state/modules/authedUser";
 import { useLocation, useNavigate } from "react-router-dom";
-import PageRoutes from "../../state/types/page_routes";
-import LoadingStatus from "../../state/types/loading_status";
+import PageRoutes from "../../../state/types/page_routes";
+import LoadingStatus from "../../../state/types/loading_status";
 interface LocationState {
   prevRoute: string;
 }
@@ -56,6 +56,7 @@ export default function Signin() {
       <Container
         component={Paper}
         maxWidth="sm"
+        data-testid="login-container"
         sx={{
           my: 6,
           py: 3,
