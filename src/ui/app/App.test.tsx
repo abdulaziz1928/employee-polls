@@ -12,6 +12,7 @@ describe("App", () => {
     store = setupStore();
     await store.dispatch(handleInitialData());
   });
+
   it("should render the component", () => {
     const { container } = renderWithProvidersAndRouter(<App />);
     expect(container).toBeDefined();
@@ -29,6 +30,7 @@ describe("App", () => {
     renderWithProvidersAndRouter(<App />, { store });
     expect(screen.getByTestId("home-container")).toBeInTheDocument();
   });
+
   it("should render the header if user is logged in", async () => {
     renderWithProvidersAndRouter(<App />, { store });
     expect(screen.getByTestId("header-appbar")).toBeInTheDocument();

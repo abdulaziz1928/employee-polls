@@ -59,7 +59,7 @@ export default function LeaderboardTable(props: ILeaderboardTableProps) {
               </TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody data-testid="leaderboard-table-body">
             {users.map((user) => {
               const numAnswers = Object.keys(user.answers).length;
               const numQuestions = user.questions.length;

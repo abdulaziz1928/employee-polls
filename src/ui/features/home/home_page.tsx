@@ -13,6 +13,7 @@ import { sortQuestions, splitQuestions } from "../../../state/utils/helpers";
 import QuestionPolls from "./components/polls";
 import Title from "../common/title";
 import LoadingStatus from "../../../state/types/loading_status";
+import { shallowEqual } from "react-redux";
 
 export default function HomePage() {
   const [value, setValue] = useState(0);
@@ -22,9 +23,10 @@ export default function HomePage() {
   );
   const userAnswers = useAppSelector((state) => {
     const authedUser = state.authedUser.entities;
-    const userAnswers = state.users.entities[authedUser!].answers;
+    let userAnswers: Record<string, string> = {};
+    if (authedUser) userAnswers = state.users.entities[authedUser!].answers;
     return userAnswers;
-  });
+  }, shallowEqual);
 
   const sortedQuestions = sortQuestions(questions);
   const [answered, unAnswered] = splitQuestions(sortedQuestions, userAnswers);

@@ -19,11 +19,13 @@ describe("PollPage", () => {
     await store.dispatch(handleInitialData());
     store.dispatch(setAuthedUser("tylermcginnis"));
   });
+
   it("should render the component", () => {
     const { container } = renderWithProvidersAndRouter(<PollPage />);
     expect(container).toBeDefined();
     expect(container).toMatchSnapshot();
   });
+
   it("should render AnswerPoll form if user has not voted on the poll", () => {
     renderWithProvidersAndRouter(
       page,
@@ -32,6 +34,7 @@ describe("PollPage", () => {
     );
     expect(screen.getByTestId("answer-poll-container")).toBeInTheDocument();
   });
+
   it("should render PollResults if user has already voted on the poll", () => {
     renderWithProvidersAndRouter(
       page,
@@ -40,6 +43,7 @@ describe("PollPage", () => {
     );
     expect(screen.getByTestId("poll-results-container")).toBeInTheDocument();
   });
+
   it("should redirect to PollResults once the user votes on an option", async () => {
     renderWithProvidersAndRouter(
       page,

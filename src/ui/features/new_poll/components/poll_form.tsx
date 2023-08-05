@@ -15,6 +15,7 @@ export default function PollForm(props: IPollFormProps) {
       <FormControl fullWidth>
         <Stack spacing={2}>
           <TextField
+            inputProps={{ "data-testid": "option-one-text-field" }}
             id="optionOne"
             label="Option One"
             name="optionOne"
@@ -23,6 +24,7 @@ export default function PollForm(props: IPollFormProps) {
             fullWidth
           />
           <TextField
+            inputProps={{ "data-testid": "option-two-text-field" }}
             id="optionTwo"
             label="Option Two"
             name="optionTwo"
@@ -32,6 +34,7 @@ export default function PollForm(props: IPollFormProps) {
           />
         </Stack>
         <LoadingButton
+          data-testid="submit-poll-button"
           variant="contained"
           sx={{ my: 1 }}
           fullWidth
