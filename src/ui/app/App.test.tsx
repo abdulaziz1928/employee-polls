@@ -19,13 +19,13 @@ describe("App", () => {
     expect(container).toMatchSnapshot();
   });
 
-  it("should return the login page if user is not logged in", () => {
+  it("should render the login page if user is not logged in", () => {
     renderWithProvidersAndRouter(<App />);
     expect(screen.getByTestId("login-container")).toBeInTheDocument();
     expect(screen.queryByTestId("header-appbar")).not.toBeInTheDocument();
   });
 
-  it("should return the home page if user is logged in", async () => {
+  it("should render the home page if user is logged in", async () => {
     store.dispatch(setAuthedUser("tylermcginnis"));
     renderWithProvidersAndRouter(<App />, { store });
     expect(screen.getByTestId("home-container")).toBeInTheDocument();
