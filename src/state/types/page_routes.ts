@@ -2,7 +2,7 @@ enum PageRoutes {
   Home = "/",
   Leaderboard = "/leaderboard",
   Question = "/questions/:id",
-  New = "/new",
+  New = "/add",
   Login = "/login",
   NotFound = "/404",
 }
