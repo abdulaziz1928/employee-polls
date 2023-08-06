@@ -29,7 +29,7 @@ export default function NewPollPage() {
         optionOneText: optionOneText!,
         optionTwoText: optionTwoText!,
       })
-    );
+    )
     if (loading === LoadingStatus.failed) {
       console.error(error);
     } else {
